@@ -11,23 +11,19 @@ const FileUpload = () => {
 
   const onFormSubmit = async (event) => {
     event.preventDefault();
-
     if (!file) {
       alert('Please select a file');
       return;
     }
-
     const formData = new FormData();
-    formData.append('file', file);
-
+    formData.append('file', file, file.name);
     try {
-      // Replace 'http://localhost:5000/upload' with your backend API endpoint
-      const response = await axios.post('http://localhost:5000/upload', formData, {
+      // Replace 'http://localhost:8081/api/upload-file' with your backend API endpoint
+      const response = await axios.post('http://localhost:8081/api/upload-file', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
       console.log('File uploaded successfully:', response.data);
     } catch (error) {
       console.error('Error uploading file:', error.message);
